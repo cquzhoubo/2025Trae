@@ -6,12 +6,12 @@ if (-not (Test-Path $sshPath)) {
     attrib +h $sshPath
 }
 
-@"
+[IO.File]::WriteAllText("$sshPath\config", @"
 Host github.com
     HostName github.com
     User git
     IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes
-"@ | Out-File -FilePath "$sshPath\config" -Encoding utf8NoBOM -NoNewline
+"@)
 
-Write-Host '✅ 请执行：ssh -T git@github.com'
+Write-Host '✅ 请执行验证命令：ssh -T git@github.com'
